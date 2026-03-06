@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("product/taxes")
 public class TaxController extends AbstractCrudController<TaxRequestDto, TaxResponseDto, Long> {
-    private TaxService taxService;
+    private final TaxService taxService;
     @Override
     protected CrudService<TaxRequestDto, TaxResponseDto, Long> service() {
         return taxService;
     }
+
 }

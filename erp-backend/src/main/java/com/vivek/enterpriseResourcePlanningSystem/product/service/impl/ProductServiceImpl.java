@@ -38,7 +38,7 @@ public class ProductServiceImpl extends AbstractCrudService<Product, ProductRequ
     @Override
     public ProductResponseDto create(ProductRequestDto dto) {
 
-        Product product = productMapper.toEntity(dto);
+        Product product = new Product();
 
         Category category = categoryRepository
                 .findById(dto.getCategoryId())
@@ -46,7 +46,10 @@ public class ProductServiceImpl extends AbstractCrudService<Product, ProductRequ
 
         Brand brand = brandRepository.findById(dto.getBrandId())
                 .orElseThrow(() -> new RuntimeException("Brand not found"));
-
+        product.setName(dto.getName());
+        product.setPrice(dto.getPrice());
+        product.setStock(dto.getStock());
+        product.setDescription(dto.getDescription());
         product.setCategory(category);
         product.setBrand(brand);
 
@@ -54,10 +57,29 @@ public class ProductServiceImpl extends AbstractCrudService<Product, ProductRequ
     }
 
     @Override
-    public ProductResponseDto update(Long id, ProductRequestDto request) {
-        Product product = productMapper.toEntity(request);
-        productRepository.findById(id).ifPresent(productRepository::delete);
-        return productMapper.toDto(productRepository.save(product));
+    public ProductResponseDto update(Long id, ProductRequestDto dto) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Update fields from DTO
+        existingProduct.setName(dto.getName());
+        existingProduct.setDescription(dto.getDescription());
+        existingProduct.setPrice(dto.getPrice());
+        existingProduct.setStock(dto.getStock());
+
+        if (dto.getCategoryId() != null) {
+            Category category = categoryRepository.findById(dto.getCategoryId())
+                    .orElseThrow(() -> new RuntimeException("Category not found"));
+            existingProduct.setCategory(category);
+        }
+
+        if (dto.getBrandId() != null) {
+            Brand brand = brandRepository.findById(dto.getBrandId())
+                    .orElseThrow(() -> new RuntimeException("Brand not found"));
+            existingProduct.setBrand(brand);
+        }
+
+        return productMapper.toDto(productRepository.save(existingProduct));
     }
 }
 

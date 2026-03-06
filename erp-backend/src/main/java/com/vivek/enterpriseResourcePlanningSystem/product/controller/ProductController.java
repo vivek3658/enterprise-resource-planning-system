@@ -17,5 +17,6 @@ public class ProductController extends AbstractCrudController<ProductRequestDto,
     protected CrudService<ProductRequestDto, ProductResponseDto, Long> service() {
         return productService;
     }
+
 }
 
