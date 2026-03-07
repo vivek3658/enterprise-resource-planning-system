@@ -16,5 +16,17 @@ import lombok.Setter;
         name = "salary_structures"
 )
 public class SalaryStructure extends BaseEntity {
-    private Double basic;
+    @Column(nullable = false)
+    private Double basicSalary;
+    @Column(nullable = false)
+    private Double hra;
+    @Column(nullable = false)
+    private Double allowance;
+    @Column(nullable = false)
+    private Double deductions;
+
+    @OneToOne
+    @JoinColumn(unique = true,nullable = false)
+    private Employee employee;
+
 }

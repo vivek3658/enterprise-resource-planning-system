@@ -1,7 +1,7 @@
 package com.vivek.enterpriseResourcePlanningSystem.system.entity;
 
 import com.vivek.enterpriseResourcePlanningSystem.common.entity.BaseEntity;
-import com.vivek.enterpriseResourcePlanningSystem.common.enums.Status;
+import com.vivek.enterpriseResourcePlanningSystem.common.enums.EmployeeStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +23,5 @@ public class User extends BaseEntity {
 
     private String password;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private EmployeeStatus employeeStatus;
 }

@@ -1,6 +1,6 @@
 package com.vivek.enterpriseResourcePlanningSystem.common.enums;
 
-public enum Status {
+public enum EmployeeStatus {
     ACTIVE,
     INACTIVE
 }
