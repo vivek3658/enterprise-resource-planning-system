@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.w3c.dom.stylesheets.LinkStyle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,6 @@ public class Department extends BaseEntity {
     private String name;
 
     private String description;
-    @OneToMany
-    private List<Employee> employee;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Employee> employees = new ArrayList<>();
 }

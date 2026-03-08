@@ -3,6 +3,8 @@ package com.vivek.enterpriseResourcePlanningSystem.common.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.parser.Entity;
+
 @Component
 public abstract class AbstractBaseMapper<E, REQ, RES>
         implements BaseMapper<E, REQ, RES> {
@@ -28,6 +30,8 @@ public abstract class AbstractBaseMapper<E, REQ, RES>
     public RES toDto(E entity) {
         return modelMapper.map(entity, responseClass);
     }
+
+
 }
 
 
