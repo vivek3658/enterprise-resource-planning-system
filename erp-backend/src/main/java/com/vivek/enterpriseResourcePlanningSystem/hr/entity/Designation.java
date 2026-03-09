@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,6 +31,6 @@ public class Designation extends BaseEntity {
     private Integer level;
     @OneToMany
     @Column(nullable = false)
-    private List<Employee> employee;
+    private List<Employee> employee = new ArrayList<>();
 
 }
