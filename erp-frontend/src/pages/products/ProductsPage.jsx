@@ -13,7 +13,6 @@ const ProductsPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [stock, setStock] = useState('');
   const [brandId, setBrandId] = useState('');
   const [categoryId, setCategoryId] = useState('');
 
@@ -55,14 +54,13 @@ const ProductsPage = () => {
     setName('');
     setDescription('');
     setPrice('');
-    setStock('');
     setBrandId('');
     setCategoryId('');
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const productData = { name, description, price, stock, brandId: Number(brandId), categoryId: Number(categoryId) };
+    const productData = { name, description, price, brandId: Number(brandId), categoryId: Number(categoryId) };
 
     try {
       if (editingProduct) {
@@ -83,7 +81,6 @@ const ProductsPage = () => {
     setName(product.name);
     setDescription(product.description);
     setPrice(product.price);
-    setStock(product.stock);
     const brand = brands.find(b => b.name === product.brand);
     if(brand) setBrandId(brand.id);
     const category = categories.find(c => c.name === product.category);
@@ -111,7 +108,6 @@ const ProductsPage = () => {
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name" required />
         <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" />
         <input type="number" value={price} onChange={e => setPrice(e.target.value)} placeholder="Price" required />
-        <input type="number" value={stock} onChange={e => setStock(e.target.value)} placeholder="Stock" />
         <select value={brandId} onChange={e => setBrandId(e.target.value)} required>
           <option value="">Select Brand</option>
           {brands.map(brand => <option key={brand.id} value={brand.id}>{brand.name}</option>)}
@@ -125,37 +121,37 @@ const ProductsPage = () => {
       </form>
 
       <h1>Products</h1>
-      <table className="products-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Category</th>
-            <th>Brand</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products && products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.description}</td>
-              <td>{product.price}</td>
-              <td>{product.stock}</td>
-              <td>{product.category}</td>
-              <td>{product.brand}</td>
-              <td>
-                <button onClick={() => handleEdit(product)}>Edit</button>
-                <button onClick={() => handleDelete(product.id)}>Delete</button>
-              </td>
+      <div className="table-wrapper">
+        <table className="products-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products && products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.brand}</td>
+                <td>
+                  <button onClick={() => handleEdit(product)}>Edit</button>
+                  <button onClick={() => handleDelete(product.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className="pagination">
         <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
           Previous

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './CategoriesPage.css';
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -62,7 +63,7 @@ const CategoriesPage = () => {
   };
 
   return (
-    <div>
+    <div className="categories-container">
       <h2>Categories</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleAddCategory}>
@@ -75,46 +76,48 @@ const CategoriesPage = () => {
         />
         <button type="submit">Add Category</button>
       </form>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category) => (
-            <tr key={category.id}>
-              <td>{category.id}</td>
-              <td>
-                {editingCategory && editingCategory.id === category.id ? (
-                  <input
-                    type="text"
-                    value={editingCategory.name}
-                    onChange={(e) => setEditingCategory({ ...editingCategory, name: e.target.value })}
-                  />
-                ) : (
-                  category.name
-                )}
-              </td>
-              <td>
-                {editingCategory && editingCategory.id === category.id ? (
-                  <>
-                    <button onClick={() => handleUpdateCategory(editingCategory.id, editingCategory.name)}>Save</button>
-                    <button onClick={() => setEditingCategory(null)}>Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => handleEdit(category)}>Edit</button>
-                    <button onClick={() => handleDeleteCategory(category.id)}>Delete</button>
-                  </>
-                )}
-              </td>
+      <div className="table-wrapper">
+        <table className="categories-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categories.map((category) => (
+              <tr key={category.id}>
+                <td>{category.id}</td>
+                <td>
+                  {editingCategory && editingCategory.id === category.id ? (
+                    <input
+                      type="text"
+                      value={editingCategory.name}
+                      onChange={(e) => setEditingCategory({ ...editingCategory, name: e.target.value })}
+                    />
+                  ) : (
+                    category.name
+                  )}
+                </td>
+                <td>
+                  {editingCategory && editingCategory.id === category.id ? (
+                    <>
+                      <button onClick={() => handleUpdateCategory(editingCategory.id, editingCategory.name)}>Save</button>
+                      <button onClick={() => setEditingCategory(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => handleEdit(category)}>Edit</button>
+                      <button onClick={() => handleDeleteCategory(category.id)}>Delete</button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className="pagination">
         <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
           Previous

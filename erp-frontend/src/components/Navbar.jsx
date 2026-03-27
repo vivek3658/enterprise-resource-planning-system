@@ -1,12 +1,13 @@
 import React from 'react'
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
   return (
     <div id='navbar'>
-        <span id='menu'>☰</span>
+        <span id='menu' onClick={toggleSidebar}>☰</span>
         <h1 id='title'>Enterprise Resource Planning System</h1>
-        <button id='login-btn'>Log in</button>
+        <Link to="/login" id='login-btn'>Log in</Link>
     </div>
   )
 }

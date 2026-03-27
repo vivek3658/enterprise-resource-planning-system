@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './BrandsPage.css';
 
 const BrandsPage = () => {
   const [brands, setBrands] = useState([]);
@@ -62,7 +63,7 @@ const BrandsPage = () => {
   };
 
   return (
-    <div>
+    <div className="brands-container">
       <h2>Brands</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleAddBrand}>
@@ -75,46 +76,48 @@ const BrandsPage = () => {
         />
         <button type="submit">Add Brand</button>
       </form>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {brands.map((brand) => (
-            <tr key={brand.id}>
-              <td>{brand.id}</td>
-              <td>
-                {editingBrand && editingBrand.id === brand.id ? (
-                  <input
-                    type="text"
-                    value={editingBrand.name}
-                    onChange={(e) => setEditingBrand({ ...editingBrand, name: e.target.value })}
-                  />
-                ) : (
-                  brand.name
-                )}
-              </td>
-              <td>
-                {editingBrand && editingBrand.id === brand.id ? (
-                  <>
-                    <button onClick={() => handleUpdateBrand(editingBrand.id, editingBrand.name)}>Save</button>
-                    <button onClick={() => setEditingBrand(null)}>Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => handleEdit(brand)}>Edit</button>
-                    <button onClick={() => handleDeleteBrand(brand.id)}>Delete</button>
-                  </>
-                )}
-              </td>
+      <div className="table-wrapper">
+        <table className="brands-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {brands.map((brand) => (
+              <tr key={brand.id}>
+                <td>{brand.id}</td>
+                <td>
+                  {editingBrand && editingBrand.id === brand.id ? (
+                    <input
+                      type="text"
+                      value={editingBrand.name}
+                      onChange={(e) => setEditingBrand({ ...editingBrand, name: e.target.value })}
+                    />
+                  ) : (
+                    brand.name
+                  )}
+                </td>
+                <td>
+                  {editingBrand && editingBrand.id === brand.id ? (
+                    <>
+                      <button onClick={() => handleUpdateBrand(editingBrand.id, editingBrand.name)}>Save</button>
+                      <button onClick={() => setEditingBrand(null)}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => handleEdit(brand)}>Edit</button>
+                      <button onClick={() => handleDeleteBrand(brand.id)}>Delete</button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className="pagination">
         <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
           Previous

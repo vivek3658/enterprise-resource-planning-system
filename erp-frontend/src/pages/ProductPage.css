@@ -1,23 +1,73 @@
-.product-page .tab-navigation {
-    display: flex;
-    border-bottom: 1px solid #ccc;
+.product-page {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.tab-navigation {
+  display: flex;
+  border-bottom: 2px solid #4CAF50;
+  background-color: white;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tab-navigation button {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-navigation button.active {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+
+.tab-navigation button:hover:not(.active) {
+  background-color: #f1f8e9;
+  color: #4CAF50;
+}
+
+.page-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-height: 60vh;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tab-navigation {
+    flex-direction: column;
   }
-  
-  .product-page .tab-navigation button {
-    padding: 10px 20px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+  .tab-navigation button {
+    padding: 12px 15px;
+    font-size: 14px;
   }
-  
-  .product-page .tab-navigation button.active {
-    border-bottom: 2px solid blue;
-    font-weight: bold;
+  .page-content {
+    padding: 1rem;
   }
-  
-  .product-page .page-content {
-    padding: 20px;
+}
+
+@media (max-width: 480px) {
+  .product-page {
+    padding: 0.5rem;
   }
+  .tab-navigation button {
+    padding: 10px;
+    font-size: 13px;
+  }
+  .page-content {
+    padding: 0.5rem;
+  }
+}
   

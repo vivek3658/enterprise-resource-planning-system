@@ -5,17 +5,57 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: whitesmoke;
-    border-bottom: 1px solid rgb(178, 178, 178);
+    background-color: white;
+    border-bottom: 2px solid #4CAF50;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 #menu{
     font-size: 30px;
+    cursor: pointer;
+    color: #4CAF50;
+}
+#title{
+    font-size: 1.5rem;
+    text-align: center;
+    flex-grow: 1;
+    color: #333;
+    font-weight: bold;
 }
 #login-btn{
-    background-color: rgb(37, 106, 255);
-    padding: 15px;
+    background-color: #4CAF50;
+    padding: 10px 15px;
     border-radius: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bolder;
     color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+#login-btn:hover {
+    background-color: #45a049;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #navbar {
+        padding: 10px;
+    }
+    #title {
+        font-size: 1.2rem;
+    }
+    #login-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #title {
+        font-size: 1rem;
+    }
+    #menu {
+        font-size: 25px;
+    }
 }

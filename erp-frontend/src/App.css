@@ -2,12 +2,40 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+body {
+  background-color: #f9f9f9;
 }
 #main{
   display: flex;
+  min-height: 100vh;
 }
 html{
   scroll-behavior: smooth;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #main {
+        position: relative;
+    }
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 999;
+    }
 }

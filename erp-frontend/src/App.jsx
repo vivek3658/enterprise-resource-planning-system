@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx'
 import Navbar from './components/Navbar.jsx'
 import Sidebar from './components/Sidebar.jsx'
@@ -15,16 +15,29 @@ import HRPage from './pages/HRPage.jsx'
 import CompanyPage from './pages/CompanyPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import ProductsPage from './pages/products/ProductsPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 
-function App() {
+function AppContent() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  const isLoginPage = location.pathname === '/login';
 
   return (
-    <BrowserRouter>
     <div id='root'>
-      <Navbar />
+      {!isLoginPage && <Navbar toggleSidebar={toggleSidebar} />}
+      {!isLoginPage && (
         <div id='main'>
-          <Sidebar />
+          <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+          {isSidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
           <Routes>
             <Route path='/product/brands' element={<ProductsPage />} />
             <Route path='/product/categories' element={<ProductsPage />} />
@@ -43,7 +56,20 @@ function App() {
             <Route path='/*' element={<NotFoundPage />} />
           </Routes>
         </div>
+      )}
+      {isLoginPage && (
+        <Routes>
+          <Route path='/login' element={<LoginPage />} />
+        </Routes>
+      )}
     </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   )
 }
